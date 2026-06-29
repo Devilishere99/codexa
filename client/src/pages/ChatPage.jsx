@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Send, Menu, X, ArrowLeft } from 'lucide-react';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
-const API = `${BACKEND_URL}/api`;
+const API = "https://codexa-production-c1d6.up.railway.app/api";
 
 const ChatPage = () => {
   const navigate = useNavigate();
@@ -43,37 +42,6 @@ const ChatPage = () => {
     }
   };
 
-  /*const handleSendMessage = async (e) => {
-    e?.preventDefault();
-    if (!chatInput.trim() || isTyping) return;
-
-    const userMessage = chatInput.trim();
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
-    setChatInput('');
-    setIsTyping(true);
-
-    try {
-      const response = await fetch(`${API}/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: userMessage })
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        setMessages(prev => [...prev, { role: 'ai', content: data.answer }]);
-      } else {
-        setMessages(prev => [...prev, { role: 'ai', content: `Error: ${data.error}` }]);
-      }
-    } catch (error) {
-      setMessages(prev => [...prev, { role: 'ai', content: 'Network Error: Failed to reach the AI.' }]);
-    } finally {
-      setIsTyping(false);
-    }
-  };
-  */
-  
   // Backend API Integration for Sending Messages
   const handleSendMessage = async (e) => {
     e?.preventDefault();
