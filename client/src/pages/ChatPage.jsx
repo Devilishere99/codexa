@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Send, Menu, X, ArrowLeft } from 'lucide-react';
 
-const API = "https://codexa-production-c1d6.up.railway.app/api";
+const API = "https://codexa-production-5756.up.railway.app/api";
 
 const ChatPage = () => {
   const navigate = useNavigate();
@@ -25,18 +25,19 @@ const ChatPage = () => {
       const response = await fetch(`${API}/repo/clone`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ repoUrl })
+     /*   body: JSON.stringify({ repoUrl })*/
+        body: JSON.stringify({ repoUrl: repoUrl.trim() })
       });
       
       const data = await response.json();
       
       if (response.ok) {
-        setIndexStatus('✅ Repository successfully indexed! You can now ask questions.');
+        setIndexStatus('Repository successfully indexed! You can now ask questions.');
       } else {
-        setIndexStatus(`❌ Error: ${data.error || 'Failed to index'}`);
+        setIndexStatus(`Error: ${data.error || 'Failed to index'}`);
       }
     } catch (error) {
-      setIndexStatus(`❌ Network Error: Could not connect to server.`);
+      setIndexStatus(`Network Error: Could not connect to server.`);
     } finally {
       setIsIndexing(false);
     }
